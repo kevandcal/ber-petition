@@ -1,0 +1,23 @@
+<div id="second-header">
+    <div id="header-links">
+        <a href="/profile/edit">edit profile</a> &vert;
+        <a href="/signers">list of signatories</a> &vert;
+        <a href="/logout">logout</a>
+    </div>
+</div>
+
+
+<h1 class="center">Thanks for signing the petition, {{fname}}!</h1>
+
+<div class="center">
+    <img src="{{sig}}">
+</div>
+<form  method="post">
+    <input type="hidden" name="_csrf" value="{{csrfToken}}">
+    <button class="center" type="submit">DELETE SIGNATURE</button>
+</form>
+
+<p class="center">
+    <a href='/signers'>See who else has signed</a>
+</p>
+</div>

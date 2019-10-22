@@ -1,0 +1,29 @@
+<div id="second-header">
+    <div id="header-links">
+        <a href="/registration">register</a> &vert;
+        <a href="login">login</a>
+    </div>
+</div>
+
+
+<h1 class="input">Good to see you again!</h1>
+
+<div class="login-container">
+    <form method="POST">
+        <div class="sub-form-div">
+            <div class="input-container">
+                <input type="email" required name="email">
+                <div class="input-label">Email Address</div>
+            </div>
+            <div class="input-container">
+                <input type="password" required name="password">
+                <div class="input-label">Password</div>
+            </div>
+        </div>
+        <input type="hidden" name="_csrf" value="{{csrfToken}}">
+        {{#if error}}
+            <div class="error">You seem to have entered an invalid email address or password. If you don't have an account yet, please sign up <a href="/registration">here</a>.</div>
+        {{/if}}
+        <button type='submit'>LOG IN</button>
+    </form>
+</div>

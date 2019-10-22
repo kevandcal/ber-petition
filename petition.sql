@@ -1,0 +1,40 @@
+-- DROP TABLE IF EXISTS signers;
+
+-- CREATE TABLE signers (
+--     id SERIAL PRIMARY KEY,
+--     first VARCHAR(400) NOT NULL,
+--     last VARCHAR(400) NOT NULL,
+--     signature TEXT NOT NULL
+-- );
+
+-- SELECT * FROM signers;
+
+DROP TABLE IF EXISTS users CASCADE;
+
+CREATE TABLE users(
+    id SERIAL PRIMARY KEY,
+    first VARCHAR(255) NOT NULL,
+    last VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(100) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+DROP TABLE IF EXISTS signatures CASCADE;
+
+CREATE TABLE signatures (
+    id SERIAL PRIMARY KEY,
+    signature TEXT NOT NULL,
+    user_id INTEGER REFERENCES users(id) NOT NULL UNIQUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+DROP TABLE IF EXISTS user_profiles CASCADE;
+
+CREATE TABLE user_profiles (
+    id SERIAL PRIMARY KEY,
+    age INTEGER,
+    city VARCHAR(150),
+    url VARCHAR(300),
+    user_id INTEGER REFERENCES users(id) NOT NULL UNIQUE
+);

@@ -1,0 +1,32 @@
+<div id="second-header">
+    <div id="header-links">
+        <a href="/profile/edit">edit profile</a> &vert;
+        <a href="/thanks">your signature</a> &vert;
+        <a href="/logout">logout</a>
+    </div>
+</div>
+
+<h1 class="center">Here's who has signed so far:</h1>
+
+{{#signers}}
+{{#if url}}
+    {{#if age}}
+        <p class="center">
+        <a href="{{url}}" target="_blank">{{fname}} {{lname}}</a> &vert;
+        {{age}} years old &vert;
+        <a href="/signers/{{city}}"  target="_blank" >{{city}}</a>
+        </p>
+    {{else}}
+        <p class="center">
+        <a href="{{url}}" target="_blank">{{fname}} {{lname}}</a> &vert;
+        <a href="/signers/{{city}}"  target="_blank" >{{city}}</a>
+        </p>
+    {{/if}}
+{{else}}
+    {{#if age}}
+        <p class="center">{{fname}} {{lname}} &vert; {{age}} years old &vert; <a href="/signers/{{city}}"  target="_blank">{{city}}</a> </p>
+    {{else}}
+        <p class="center">{{fname}} {{lname}} &vert; <a href="/signers/{{city}}"  target="_blank">{{city}}</a> </p>
+    {{/if}}
+{{/if}}
+{{/signers}}

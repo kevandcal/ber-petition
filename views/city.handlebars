@@ -1,0 +1,20 @@
+<div id="second-header">
+    <div id="header-links">
+        <a href="/profile/edit">edit profile</a> &vert;
+        <a href="/thanks">your signature</a> &vert;
+        <a href="/logout">logout</a>
+    </div>
+</div>
+
+<h1 class="center">These are the people from {{city}} who've signed the petition:</h1>
+
+{{#signers}}
+{{#if url}}
+    <p class="center">
+    <a href="{{url}}" target="_blank">{{fname}} {{lname}}</a> &vert;
+    {{age}} years old
+    </p>
+{{else}}
+    <p class="center">{{fname}} {{lname}} &vert; {{age}} years old </p>
+{{/if}}
+{{/signers}}

@@ -1,0 +1,48 @@
+<div id="second-header">
+    <div id="header-links">
+        <a href="https://en.wikipedia.org/wiki/Berlin_Brandenburg_Airport#Delayed_opening_and_construction_flaws" target="_blank">more information</a> &vert;
+        <a href="login">login</a>
+    </div>
+</div>
+
+<div id="timer-container">
+    <p id="timer">
+        <div id="timer-years" class="time-since-ber"></div>
+        <div id="timer-days" class="time-since-ber"></div>
+        <div id="timer-hours" class="time-since-ber"></div>
+        <div id="timer-mins" class="time-since-ber"></div>
+        <div id="timer-secs" class="time-since-ber"></div>
+    </p>
+</div>
+
+<h1 class="registration">That's how long ago BER Airport was supposed to open.<br> <span class="bold-text">OUTRAGEOUS!</span> <br>Enough <span class="bold-text">time</span> and <span class="bold-text">money</span> have been <span class="bold-text">wasted</span>. <br>It's time to turn it into something useful. <br> We're thinking <span id="type-effect"></span> <br> If you agree, sign the petition by creating an account below.</h1>
+
+<div class="form-container">
+    <form method="POST">
+        <div class="sub-form-div">
+            <div class="input-container">
+                <input type="text" required name="fname">
+                <div class="input-label">First Name</div>
+            </div>
+            <div class="input-container">
+                <input type="text" required name="lname">
+                <div class="input-label">Last Name</div>
+            </div>
+            <div class="input-container">
+                <input type="email" required name="email">
+                <div class="input-label">Email Address</div>
+            </div>
+            <div class="input-container">
+                <input type="password" required name="password">
+                <div class="input-label">Password</div>
+            </div>
+        </div>
+        <input type="hidden" name="_csrf" value="{{csrfToken}}">
+        <button type='submit'>SIGN UP</button>
+    </form>
+</div>
+
+<p class="center">Already have an account? You can log in <a href="/login">here</a></p>
+
+<script src="https://cdn.jsdelivr.net/npm/typeit@6/dist/typeit.min.js"></script>
+<script src="/script.js" type="text/javascript"></script>

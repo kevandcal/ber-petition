@@ -1,0 +1,29 @@
+<h1 class="input">Please provide additional information if you wish (optional).</h1>
+
+<div id="second-header">
+    <div id="header-links">
+        <a href="/signature">sign the petition</a> &vert;
+        <a href="/logout">logout</a>
+    </div>
+</div>
+
+<div id="inputform-container" class="login-container">
+    <form method="POST">
+        <div class="sub-form-div">
+            <div class="input-container">
+                <input type="number" name="age" class="profile-input">
+                <div class="input-label">Your age</div>
+            </div>
+            <div class="input-container">
+                <input type="text" name="city" class="profile-input">
+                <div class="input-label">City where you live</div>
+            </div>
+            <div class="input-container">
+                <input type="text" name="url" class="profile-input">
+                <div class="input-label">Your website</div>
+            </div>
+        </div>
+        <input type="hidden" name="_csrf" value="{{csrfToken}}">
+        <button type='submit'>SUBMIT</button>
+    </form>
+</div>
