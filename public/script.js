@@ -52,4 +52,3 @@ const timer = setInterval(() => {
         ("0" + secs).slice(-2) + "<span class='timer-label'>&thinsp; s</span>";
 }, 1000);
 
-// setInterval();

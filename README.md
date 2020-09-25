@@ -1,6 +1,6 @@
 # Online Petition
 
-This online petition was my first week-long project while a student at [SPICED Academy](https://spiced.academy/program/full-stack-web-development/). It incorporates registration, login, user profiles and signatures, and the ability to edit one's own profile and signature. The subject matter of the BER Airport fiasco is simply filler and meant to be humorous rather than vitriolic.
+This farcical online petition incorporates registration, login, user profiles and signatures, and the ability to edit one's own profile and signature. The subject matter of the BER Airport fiasco is simply filler and meant to be humorous rather than vitriolic.
 
 ## Demo (click to try for yourself)
 

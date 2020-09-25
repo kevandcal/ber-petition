@@ -1,5 +1,4 @@
 const express = require("express");
-// const app = express();
 const app = (exports.app = express());
 const db = require("./utils/db");
 const mw = require("./middleware");
@@ -7,7 +6,6 @@ const { hash, compare } = require("./utils/bc");
 const hb = require("express-handlebars");
 const cs = require("cookie-session");
 const csurf = require("csurf");
-// const redis = require("./redis");
 
 app.engine("handlebars", hb());
 app.set("view engine", "handlebars");
@@ -27,7 +25,7 @@ app.use(
 
 app.use(csurf());
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     res.setHeader("x-frame-options", "deny");
     res.locals.csrfToken = req.csrfToken();
     next();
@@ -41,56 +39,6 @@ app.use(mw.redirectToRegistration);
 app.get("/", (req, res) => {
     res.redirect("/registration");
 });
-
-// Fake route for testing only!!!:
-// app.get("/welcome", (req, res) => {
-//     if (req.session.fakeCookieForDemo) {
-//         res.send("<p>Wow you have a cookie</p>");
-//     } else {
-//         res.redirect("/registration");
-//     }
-// });
-
-// Fake routes with which to demo Redis:
-// app.get("/redis-fun", (req, res) => {
-//     // (KEY, time to expiration (in seconds), VALUE):
-//     redis
-//         .setex(
-//             "favoriteAnimals",
-//             180,
-//             // Since Redis uses .toString() on arrays, we are using JSON.stringify on our array and will convert it back to an array using JSON.parse upon retrieval:
-//             JSON.stringify(["dog", "donkey", "panda"])
-//         )
-//         .then(() => {
-//             res.redirect("/get-from-redis");
-//         })
-//         .catch(err => {
-//             console.log("err in setex: ", err);
-//         });
-// });
-//
-// app.get("/get-from-redis", (req, res) => {
-//     // this route will retrieve the favoriteAnimals list from Redis
-//     redis
-//         .get("favoriteAnimals")
-//         .then(data => {
-//             console.log("data from get-from-redis: ", JSON.parse(data));
-//         })
-//         .catch(err => {
-//             console.log("err in get-from-redis: ", err);
-//         });
-// });
-//
-// app.get("/delete-animals-from-redis", (req, res) => {
-//     redis
-//         .del("favoriteAnimals")
-//         .then(() => {
-//             res.redirect("/get-from-redis");
-//         })
-//         .catch(err => {
-//             console.log("err in redis.del: ", err);
-//         });
-// });
 
 app.get("/registration", mw.redirectAwayFromRegistration, (req, res) => {
     res.render("registration", {});
@@ -108,10 +56,8 @@ app.post("/registration", mw.redirectAwayFromRegistration, (req, res) => {
 
     hash(password)
         .then(hash => {
-            // console.log("hash: ", hash);
             db.addUser(fname, lname, email, hash)
                 .then(results => {
-                    // console.log("addUser results", arg);
                     req.session.fname = fname;
                     req.session.userId = results.rows[0].id;
                     req.session.email = email;
@@ -133,7 +79,6 @@ app.get("/profile", (req, res) => {
 });
 
 app.post("/profile", (req, res) => {
-    // console.log("/profile POST route req.body: ", req.body);
     let age = req.body.age;
     let city = req.body.city;
     city = city.charAt(0).toUpperCase() + city.substring(1);
@@ -151,11 +96,9 @@ app.post("/profile", (req, res) => {
     console.log("POST /profile url: ", url);
     db.addProfile(age, city, url, userId)
         .then(() => {
-            // console.log("/profile POST route addProfile results: ", results);
             res.redirect("/signature");
         })
         .catch(err => console.log(err));
-    // res.redirect("/signature");
 });
 
 app.get("/login", mw.redirectAwayFromRegistration, (req, res) => {
@@ -166,7 +109,6 @@ app.post("/login", mw.redirectAwayFromRegistration, (req, res) => {
     let email = req.body.email;
     db.getUserInfo(email)
         .then(results => {
-            // console.log("/login post route getUserInfo results: ", results);
             compare(req.body.password, results.rows[0].password)
                 .then(match => {
                     if (match) {
@@ -202,15 +144,12 @@ app.post("/login", mw.redirectAwayFromRegistration, (req, res) => {
 });
 
 app.get("/signature", mw.requireNoSignature, (req, res) => {
-    // console.log("get /signature route req.session: ", req.session);
     res.render("signature", {});
 });
 
 app.post("/signature", (req, res) => {
-    // console.log("post /signature req.session: ", req.session);
     let sig = req.body.sig;
     let userId = req.session.userId;
-    // console.log("post /signature req.body.sig: ", sig);
     if (sig == "") {
         res.render("signature", {
             error: true
@@ -218,8 +157,6 @@ app.post("/signature", (req, res) => {
     } else {
         db.addSignature(sig, userId)
             .then(() => {
-                // console.log(arg);
-                // req.session.userId = arg.rows[0].id;
                 req.session.sigId = true;
                 res.redirect("/thanks");
             })
@@ -234,9 +171,6 @@ app.post("/signature", (req, res) => {
 });
 
 app.get("/thanks", mw.requireSignature, (req, res) => {
-    // const firstNameInCookie = req.session.fname;
-    // const capFirstName =
-    //     firstNameInCookie.charAt(0).toUpperCase() + firstNameInCookie.slice(1);
     db.getSignature(req.session.userId)
         .then(results => {
             console.log("thanks get route getSignature results: ", results);
@@ -276,7 +210,6 @@ app.get("/signers", (req, res) => {
                     url: results[i].url
                 });
             }
-            // console.log("result: ", result);
             return signers;
         })
         .then(signers => {
@@ -288,7 +221,6 @@ app.get("/signers", (req, res) => {
         .catch(err => {
             console.log("GET /signers getUsers catch err:", err);
         });
-    // });
 });
 
 app.get("/signers/:city", (req, res) => {
@@ -321,7 +253,6 @@ app.get("/signers/:city", (req, res) => {
 app.get("/profile/edit", (req, res) => {
     db.getUserProfile(req.session.userId)
         .then(results => {
-            // console.log("GET /edit getUserProfile results: ", results);
             res.render("edit", {
                 fname: results.rows[0].first,
                 lname: results.rows[0].last,
@@ -400,13 +331,6 @@ app.get("/logout", (req, res) => {
     req.session = null;
     res.redirect("/registration");
 });
-
-// For jest testing:
-// if (require.main === module) {
-//     app.listen(8080, () => {
-//         console.log("listening!");
-//     });
-// }
 
 app.listen(process.env.PORT || 8080, () => {
     console.log("The petition project server is running");

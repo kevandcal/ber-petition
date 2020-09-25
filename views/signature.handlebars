@@ -10,7 +10,7 @@
 <div id="signature-container" class="login-container">
     <form method="POST">
         {{#if error}}
-            <div class="error blue-text">Please be sure to sign before submitting</div>
+        <div class="error blue-text">Please be sure to sign before submitting</div>
         {{/if}}
         <input type="hidden" name="sig" id="sig">
         <input type="hidden" name="_csrf" value="{{csrfToken}}">
@@ -18,7 +18,6 @@
         <div class="blue-text">Sign your name in the space above</div>
         <button type='submit'>SUBMIT</button>
     </form>
-    <!-- <p class="center"><a href='/signature'><button type="submit">CLEAR SIGNATURE</button></a></p> -->
 </div>
 
 <script src="/signature.js" type="text/javascript"></script>

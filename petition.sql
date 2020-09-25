@@ -1,14 +1,3 @@
--- DROP TABLE IF EXISTS signers;
-
--- CREATE TABLE signers (
---     id SERIAL PRIMARY KEY,
---     first VARCHAR(400) NOT NULL,
---     last VARCHAR(400) NOT NULL,
---     signature TEXT NOT NULL
--- );
-
--- SELECT * FROM signers;
-
 DROP TABLE IF EXISTS users CASCADE;
 
 CREATE TABLE users(

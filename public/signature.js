@@ -13,7 +13,7 @@ canvas.addEventListener("mousedown", e => {
     isDrawing = true;
     ctx.moveTo(e.offsetX, e.offsetY);
 });
-canvas.addEventListener("mousemove", function draw(e) {
+canvas.addEventListener("mousemove", e => {
     if (!isDrawing) return;
     ctx.lineTo(e.offsetX, e.offsetY);
     ctx.stroke();
